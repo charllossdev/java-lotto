@@ -9,7 +9,7 @@ public class LottoResult {
 
 	private final List<LottoRankCounter> lottoRankCounters;
 
-	public LottoResult(List<Lotto> lottoPackage, Lotto winnerLotto) {
+	public LottoResult(List<Lotto> lottoPackage, WinnerLotto winnerLotto) {
 		this.lottoRankCounters = LottoRankAggregation(lottoPackage, winnerLotto);
 	}
 
@@ -22,11 +22,11 @@ public class LottoResult {
 		return money.getYield(totalPrize);
 	}
 
-	private static List<LottoRankCounter> LottoRankAggregation(List<Lotto> lottoPackage, Lotto winnerLotto) {
+	private static List<LottoRankCounter> LottoRankAggregation(List<Lotto> lottoPackage, WinnerLotto winnerLotto) {
 		List<LottoRankCounter> counters = initLottoRankCounter();
 
 		for (Lotto lotto : lottoPackage) {
-			LottoRank rank = LottoRank.getRank(lotto.getMatchCount(winnerLotto));
+			LottoRank rank = LottoRank.getRank(winnerLotto.getMatchCount(lotto), winnerLotto.isContainBonus(lotto));
 			counters.get(rank.ordinal()).increaseCount();
 		}
 		return counters;

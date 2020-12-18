@@ -14,7 +14,7 @@ import lotto.util.StringValid;
 public class Lotto {
 	private static final String LOTTO_NUMBER_SEPARATOR = ",";
 	private static final int LOTTO_REQUIRED_COUNT = 6;
-	
+
 	private final List<LottoNumber> lotto;
 
 	public Lotto() {
@@ -31,9 +31,9 @@ public class Lotto {
 
 	public static List<LottoNumber> generateManualLotto(List<String> inputStr) throws IllegalArgumentException {
 		validationLottoNumberList(inputStr);
-
+		
 		return inputStr.stream()
-			.map(s -> new LottoNumber(Integer.parseInt(s)))
+			.map(s -> new LottoNumber(s))
 			.collect(Collectors.toList());
 	}
 
@@ -79,26 +79,6 @@ public class Lotto {
 			tempLotto.add(LottoNumber.generateRandomLottoNumber());
 		}
 		return tempLotto;
-	}
-
-	public int getMatchCount(Lotto compareLotto) {
-		int count = 0;
-
-		if (this.equals(compareLotto)) {
-			return LOTTO_REQUIRED_COUNT;
-		}
-
-		for (LottoNumber number : this.lotto) {
-			count += compareLotto.isContain(number);
-		}
-		return count;
-	}
-
-	private int isContain(LottoNumber number) {
-		if (this.lotto.contains(number)) {
-			return 1;
-		}
-		return 0;
 	}
 
 	@Override

@@ -4,8 +4,10 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import lotto.modal.Lotto;
+import lotto.modal.LottoNumber;
 import lotto.modal.LottoRankCounter;
 import lotto.modal.Money;
+import lotto.modal.WinnerLotto;
 
 public class UserView {
 
@@ -18,9 +20,14 @@ public class UserView {
 		return new Money(getUserInputSystem());
 	}
 
-	public static Lotto getUserInputLotto() {
-		UserOutput.printUserInputLotto();
-		return Lotto.generateWinnerLotto(getUserInputSystem());
+	public static WinnerLotto getUserInputLotto() {
+		UserOutput.printUserInputWinnerLotto();
+		Lotto winnerLotto = Lotto.generateWinnerLotto(getUserInputSystem());
+
+		UserOutput.printUserInputBonusNumber();
+		LottoNumber bonusNumber = new LottoNumber(getUserInputSystem());
+
+		return new WinnerLotto(winnerLotto, bonusNumber);
 	}
 
 	public static void printLottoPackage(List<Lotto> lottoPackage) {

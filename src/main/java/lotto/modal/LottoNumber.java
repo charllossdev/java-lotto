@@ -11,6 +11,10 @@ public class LottoNumber {
 
 	private final int number;
 
+	public LottoNumber(String userInputSystem) {
+		this(Integer.parseInt(userInputSystem));
+	}
+
 	public LottoNumber(int lottoNumber) {
 		validationLottoNumber(lottoNumber);
 		this.number = lottoNumber;
